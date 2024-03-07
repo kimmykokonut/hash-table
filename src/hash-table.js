@@ -13,12 +13,15 @@ export default class HashTable {
     this.array[index].push([key, value]);
   }
   get(key) {
-    const index = this.hash(key);
-    const bucket = this.array[index];
-    for (let i = 0; i < bucket.length; i++) {
-      if (bucket[i][0] === key) {
-        return bucket[i][1];
+    const element = this.hash(key);
+    const bucket = this.array[element];
+    if (bucket != undefined) {
+      for (let i = 0; i < bucket.length; i++) {
+        if (bucket[i][0] === key) { //value at pos.0 of ea nested arriay is the key
+          return bucket[i][1]; //value at pos.1 is value
+        }
       }
     }
-  } 
+    return null; //if bucket undefined or defined w/o value
+  }
 }
